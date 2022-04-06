@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './fplogo.svg';
 import './App.css';
 
 function App() {
@@ -6,10 +6,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="App-name">
+          FlyPal
+        </div>
       </header>
+      <div className='App-page'>
+        <h3>Travel Planner</h3>
+      </div>
     </div>
   );
 }
