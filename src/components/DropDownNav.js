@@ -20,10 +20,10 @@ export default class DropDownNav extends React.Component {
   render() {
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret>
+        <DropdownToggle caret color="info" outline>
           Menu
         </DropdownToggle>
-        <DropdownMenu dark>
+        <DropdownMenu dark="true" color="info" >
           {/* <DropdownItem header>Header</DropdownItem> */}
           {/* <DropdownItem disabled>Action</DropdownItem> */}
           <DropdownItem>Login</DropdownItem>
