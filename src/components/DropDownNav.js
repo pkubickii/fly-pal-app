@@ -23,7 +23,7 @@ export default class DropDownNav extends React.Component {
         <DropdownToggle caret color="info" outline>
           Menu
         </DropdownToggle>
-        <DropdownMenu dark="true" color="info" >
+        <DropdownMenu dark>
           {/* <DropdownItem header>Header</DropdownItem> */}
           {/* <DropdownItem disabled>Action</DropdownItem> */}
           <DropdownItem>Login</DropdownItem>
