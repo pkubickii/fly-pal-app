@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import googlelogo from "../assets/img/icons/common/google.svg";
 import githublogo from "../assets/img/icons/common/github.svg";
 import {
@@ -17,18 +17,12 @@ import {
 } from "reactstrap";
 
 const Login = () => {
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    // this.refs.main.scrollTop = 0;
-  }, []);
 
   return (
-    // <section className="section section-shaped section-lg">
     <>
-      <Container className="pt-lg-7">
+      <Container className="p-lg-2">
         <Row className="justify-content-center">
-          <Col lg="5">
+          <Col lg="12">
             <Card className="bg-secondary shadow border-0">
               <CardHeader className="bg-white pb-5">
                 <div className="text-muted text-center mb-3">
@@ -42,7 +36,7 @@ const Login = () => {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img alt="..." src={githublogo} />
+                      <img alt="github logo" src={githublogo} />
                     </span>
                     <span className="btn-inner--text">Github</span>
                   </Button>
@@ -53,7 +47,7 @@ const Login = () => {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img src={googlelogo} />
+                      <img alt="google logo" src={googlelogo} />
                     </span>
                     <span className="btn-inner--text">Google</span>
                   </Button>

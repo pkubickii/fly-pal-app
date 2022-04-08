@@ -2,7 +2,8 @@ import logo from "./fplogo.svg";
 import "./App.css";
 import { Container, Row, Col } from "reactstrap";
 import DropDownNav from "./components/DropDownNav";
-import Login from "./views/Login"
+import Login from "./views/Login";
+import LoginModal from "./views/LoginModal";
 
 function App() {
   return (
@@ -13,8 +14,7 @@ function App() {
         <Container>
           <Row xs="12">
             <Col></Col>
-            <Col>
-            </Col>
+            <Col></Col>
             <Col></Col>
             <Col></Col>
             <Col></Col>
@@ -31,8 +31,7 @@ function App() {
         </Container>
       </header>
       <div className="App-page">
-        <h3>Travel Planner</h3>
-        <Login />
+          <Login />
       </div>
     </div>
   );
