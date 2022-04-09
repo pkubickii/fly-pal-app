@@ -1,9 +1,9 @@
+import React from 'react';
 import logo from "./fplogo.svg";
 import "./App.css";
 import { Container, Row, Col } from "reactstrap";
 import DropDownNav from "./components/DropDownNav";
 import Login from "./views/Login";
-import LoginModal from "./views/LoginModal";
 
 function App() {
   return (
