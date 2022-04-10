@@ -1,40 +1,23 @@
-import React from 'react';
-import logo from "./fplogo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import { Container, Row, Col } from "reactstrap";
-import DropDownNav from "./components/DropDownNav";
-import Login from "./views/Login";
+import AppFooter from "./AppFooter";
+import AppHeader from "./AppHeader";
+import { ModalContext } from "./components/ModalContext";
+import AppHome from "./views/AppHome";
+import ModalLogin from "./views/ModalLogin";
 
-function App() {
+const App = () => {
+  const [modalToggle, setModalToggle] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className="App-name">FlyPal</div>
-        <Container>
-          <Row xs="12">
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col>
-              <DropDownNav />
-            </Col>
-          </Row>
-        </Container>
-      </header>
-      <div className="App-page">
-          <Login />
-      </div>
-    </div>
+    <>
+        <ModalContext.Provider value={{ modalToggle, setModalToggle }}>
+          <AppHeader />
+          <AppHome />
+          <AppFooter />
+          <ModalLogin />
+        </ModalContext.Provider>
+    </>
   );
-}
-
+};
 export default App;
