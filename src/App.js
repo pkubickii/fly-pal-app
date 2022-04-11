@@ -10,7 +10,6 @@ const App = () => {
   const [modalToggle, setModalToggle] = useState(false);
   const [modalType, setModalType] = useState("");
   const checkModalType = (event) => {
-    event.preventDefault();
     const {
       target: {
         dataset: { modal },
