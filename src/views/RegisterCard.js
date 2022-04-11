@@ -19,7 +19,7 @@ import {
 const RegisterCard = () => {
   return (
     <>
-      <Container className="pt-lg-7">
+      <Container className="pt-lg-2">
         <Row className="justify-content-center">
           <Col lg="12">
             <Card className="bg-secondary shadow border-0">
