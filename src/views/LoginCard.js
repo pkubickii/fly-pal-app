@@ -16,7 +16,7 @@ import {
   Col,
 } from "reactstrap";
 
-const Login = () => {
+const LoginCard = () => {
 
   return (
     <>
@@ -127,4 +127,4 @@ const Login = () => {
     </>
   );
 };
-export default Login;
+export default LoginCard;

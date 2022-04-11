@@ -5,8 +5,7 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import ModalLogin from "../views/ModalLogin";
-import { ModalContext } from "./ModalContext";
+import { ModalContext } from "../context/ModalContext";
 
 const DropMenu = () => {
   const [toggle, setToggle] = useState(false);
@@ -26,22 +25,20 @@ const DropMenu = () => {
           <i className="fa fa-user mr-2" />
           Account
         </DropdownToggle>
-        <DropdownMenu className="bg-info p-2">
-          <DropdownItem onClick={handleModalToggle}>
+        <DropdownMenu className="bg-info p-2" style={{ margin: 0 }}>
+          <DropdownItem onClick={handleModalToggle} data-modal="modal-login">
             <i className="fa fa-sign-in mr-2" /> Login
           </DropdownItem>
           <DropdownItem divider />
           <DropdownItem
-            onClick={() => {
-              alert("Register"), console.log("TODO: Register");
-            }}
+            onClick={handleModalToggle}
+            data-modal="modal-register"
           >
             <i className="fa fa-user-plus mr-2" />
             Register
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <ModalLogin />
     </>
   );
 };
