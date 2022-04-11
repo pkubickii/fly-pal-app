@@ -1,0 +1,32 @@
+{
+  "cities": [
+  {
+    "id": 1,
+    "country": "PL",
+    "name": "Warsaw",
+    "lat": "52.22977",
+    "lng": "21.01178"
+  },
+  {
+    "id": 2,
+    "country": "US",
+    "name": "New York City",
+    "lat": "40.71427",
+    "lng": "-74.00597"
+  },
+  {
+    "id": 3,
+    "country": "JP",
+    "name": "Tokyo",
+    "lat": "35.6895",
+    "lng": "139.69171"
+  },
+  {
+    "id": 4,
+    "country": "IT",
+    "name": "Rome",
+    "lat": "41.89193",
+    "lng": "12.51133"
+  }
+]
+}
