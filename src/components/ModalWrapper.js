@@ -39,6 +39,6 @@ const ModalWrapper = (props) => {
   );
 };
 ModalWrapper.propTypes = {
-  modalType: PropTypes.string.isRequired,
+  modalType: PropTypes.string,
 };
 export default ModalWrapper;
