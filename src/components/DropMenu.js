@@ -30,10 +30,7 @@ const DropMenu = () => {
             <i className="fa fa-sign-in mr-2" /> Login
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem
-            onClick={handleModalToggle}
-            data-modal="modal-register"
-          >
+          <DropdownItem onClick={handleModalToggle} data-modal="modal-register">
             <i className="fa fa-user-plus mr-2" />
             Register
           </DropdownItem>
