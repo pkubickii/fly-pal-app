@@ -2,7 +2,6 @@ import React from "react";
 import MapView from "../components/MapView";
 
 const Map = () => {
-  //   useLeafletScripts();
   return (
     <>
       <p>MAPA</p>
