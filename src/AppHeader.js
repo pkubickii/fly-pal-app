@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import DropMenu from "./components/DropMenu";
 import logo from "./fplogo.svg";
 
 const AppHeader = () => {
-    return(
+  return (
+    <nav>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo fly-pal" />
         <div className="App-name">FlyPal</div>
@@ -27,6 +28,7 @@ const AppHeader = () => {
           </Row>
         </Container>
       </header>
-    )
-}
+    </nav>
+  );
+};
 export default AppHeader;
