@@ -13,7 +13,7 @@ export const useFetchData = (props) => {
         setData(response);
       } catch (error) {
         console.error(error);
-        setData({ result: [] });
+        setData([]);
       }
       setLoading(false);
     };

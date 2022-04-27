@@ -23,11 +23,8 @@ const GetIcon = () => {
 const MapView = () => {
   useLeafletScripts();
 
-  // const position2 = [40.71427, -74.00597];
-  // const position = [52.22977, 21.01178];
-
   const { cities } = useContext(CitiesContext);
-  console.log(cities);
+
   return (
     <MapContainer
       bounds={[cities]}

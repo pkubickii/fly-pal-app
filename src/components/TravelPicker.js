@@ -1,5 +1,6 @@
+import axios from "axios";
 import { Formik, Field, Form } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Card,
@@ -10,8 +11,10 @@ import {
   InputGroup,
   InputGroupText,
 } from "reactstrap";
+import { FlightsContext } from "../context/FlightsContext";
 
 const TravelPicker = () => {
+  const { setFlights } = useContext(FlightsContext);
   return (
     <>
       <Card className="bg-primary shadow">
@@ -19,9 +22,22 @@ const TravelPicker = () => {
         <CardBody className="px-lg-4 py-lg-4">
           <Formik
             initialValues={{ startCity: "", endCity: "" }}
-            onSubmit={(data) => {
-              console.log(data);
-              alert(JSON.stringify(data, null, 2));
+            onSubmit={(values) => {
+              axios
+                .get(
+                  "http://localhost:8080/api/neo4j_get_flight/" +
+                    values.startCity +
+                    "-" +
+                    values.endCity
+                )
+                .then((response) => {
+                  // console.log(response.data);
+                  // alert(JSON.stringify(response.data, null, 2));
+                  setFlights(response.data);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             }}
           >
             {() => (

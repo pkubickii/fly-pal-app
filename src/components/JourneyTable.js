@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Table } from "reactstrap";
+import { FlightsContext } from "../context/FlightsContext";
 
 const JourneyTable = () => {
+  const { flights } = useContext(FlightsContext);
+  console.log(flights);
   return (
     <Table hover className="text-secondary">
       <thead>
@@ -13,12 +16,14 @@ const JourneyTable = () => {
         </tr>
       </thead>
       <tbody>
-        <tr scope="row">
-          <td>1</td>
-          <td>Warsaw - New York City</td>
-          <td>9h 30min</td>
-          <td>Non Stop</td>
-        </tr>
+        {flights.map((flight, index) => (
+          <tr scope="row" key={index}>
+            <td>{index}</td>
+            <td>{flight.names.map((name) => name + " ")}</td>
+            <td>{flight.cost}</td>
+            <td>{flight.names.length - 2}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );

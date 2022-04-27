@@ -12,8 +12,8 @@ const CheckDB = () => {
       {!loading && (
         <div>
           <h4>CheckDB:</h4>
-          <p>{JSON.stringify(data.result)}</p>
-          {data.result.map((item, index) => (
+          <p>{JSON.stringify(data)}</p>
+          {data.map((item, index) => (
             <p color="default" key={index}>
               {item.name}
             </p>

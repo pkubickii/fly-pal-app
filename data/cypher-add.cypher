@@ -36,3 +36,12 @@ CREATE(aa: City {
 (aa)-[:FLIGHT {time: 80}]->(ee),
 (ee)-[:FLIGHT {time: 760}]->(bb),
 (bb)-[:FLIGHT {time: 740}]->(ee);
+
+CALL gds.graph.project(
+    'citiesGraph',
+    'City',
+    'FLIGHT',
+    {
+        relationshipProperties: 'time'
+    }
+)
