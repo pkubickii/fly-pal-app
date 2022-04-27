@@ -9,7 +9,7 @@ import {
 import useLeafletScripts from "../hooks/useLeafletScripts";
 import markerIconPNG from "../assets/img/icons/markers/marker-icon.png";
 import L from "leaflet";
-import { CitiesContext } from "../context/CitiesContext";
+import { FlightsContext } from "../context/FlightsContext";
 
 const GetIcon = () => {
   return new L.icon({
@@ -23,11 +23,18 @@ const GetIcon = () => {
 const MapView = () => {
   useLeafletScripts();
 
-  const { cities } = useContext(CitiesContext);
+  const { flights } = useContext(FlightsContext);
+  // console.log(JSON.stringify(flights, null, 2));
 
+  let markerCords = [];
+  flights.forEach((flight) =>
+    markerCords.push(flight.path.map((path) => [path.lat, path.lng]))
+  );
+
+  // console.log(JSON.stringify(markerCords, null, 2));
   return (
     <MapContainer
-      bounds={[cities]}
+      bounds={[markerCords[0]]}
       boundsOptions={{ padding: [50, 50] }}
       scrollWheelZoom={false}
     >
@@ -35,16 +42,16 @@ const MapView = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {cities.map((city, index) => (
+      {markerCords[0].map((marker, index) => (
         <div key={index}>
-          <Marker position={city} icon={GetIcon()}>
+          <Marker position={marker} icon={GetIcon()}>
             <Popup>
               City City <br /> City Name.
             </Popup>
           </Marker>
         </div>
       ))}
-      ;<Polyline positions={[cities]}></Polyline>
+      ;<Polyline positions={[markerCords[0]]}></Polyline>
     </MapContainer>
   );
 };

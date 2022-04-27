@@ -4,7 +4,6 @@ import { FlightsContext } from "../context/FlightsContext";
 
 const JourneyTable = () => {
   const { flights } = useContext(FlightsContext);
-  console.log(flights);
   return (
     <Table hover className="text-secondary">
       <thead>

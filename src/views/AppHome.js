@@ -9,8 +9,8 @@ import { FlightsContext } from "../context/FlightsContext";
 
 const AppHome = () => {
   const [cities, setCities] = useState([
-    [52.22977, 21.01178],
-    [40.71427, -74.00597],
+    ["52.22977", "21.01178"],
+    ["40.71427", "-74.00597"],
   ]);
 
   const [flights, setFlights] = useState([
