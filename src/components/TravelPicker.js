@@ -13,6 +13,8 @@ import {
 } from "reactstrap";
 import { FlightsContext } from "../context/FlightsContext";
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const TravelPicker = () => {
   const { setFlights } = useContext(FlightsContext);
   return (
@@ -22,7 +24,9 @@ const TravelPicker = () => {
         <CardBody className="px-lg-4 py-lg-4">
           <Formik
             initialValues={{ startCity: "", endCity: "" }}
-            onSubmit={(values) => {
+            onSubmit={async (values, { setSubmitting }) => {
+              setSubmitting(true);
+              await sleep(1000);
               axios
                 .get(
                   "http://localhost:8080/api/neo4j_get_flight/" +
@@ -38,9 +42,10 @@ const TravelPicker = () => {
                 .catch((error) => {
                   console.log(error);
                 });
+              setSubmitting(false);
             }}
           >
-            {() => (
+            {({ isSubmitting }) => (
               <Form>
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
@@ -69,7 +74,7 @@ const TravelPicker = () => {
                   </InputGroup>
                 </FormGroup>
                 <div className="text-center">
-                  <Button color="success" type="submit">
+                  <Button disabled={isSubmitting} color="success" type="submit">
                     Search
                   </Button>
                 </div>
