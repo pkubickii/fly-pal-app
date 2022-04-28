@@ -4,16 +4,15 @@ import TravelPicker from "../components/TravelPicker";
 import CheckDB from "../components/CheckDB";
 import JourneyTable from "../components/JourneyTable";
 import MapView from "../components/MapView";
-import { CitiesContext } from "../context/CitiesContext";
 import { FlightsContext } from "../context/FlightsContext";
+import {IndexContext} from "../context/IndexContext";
 
 const AppHome = () => {
-  const [cities, setCities] = useState([
-    ["52.22977", "21.01178"],
-    ["40.71427", "-74.00597"],
-  ]);
+
+  const [index, setIndex] = useState(0);
 
   const [flights, setFlights] = useState([
+
     {
       names: ["Warsaw", "Tokyo"],
       cost: 900,
@@ -37,7 +36,7 @@ const AppHome = () => {
   return (
     <>
       <FlightsContext.Provider value={{ flights, setFlights }}>
-        <CitiesContext.Provider value={{ cities, setCities }}>
+        <IndexContext.Provider value={{ index, setIndex }}>
           <Row className="mt-3 mb-5 pt-5 pb-5" style={{ width: "100%" }}>
             <Col md="2"></Col>
             <TravelPicker />
@@ -60,7 +59,7 @@ const AppHome = () => {
               <CheckDB />
             </Col>
           </Row>
-        </CitiesContext.Provider>
+        </IndexContext.Provider>
       </FlightsContext.Provider>
     </>
   );
