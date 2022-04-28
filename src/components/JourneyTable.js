@@ -9,7 +9,7 @@ const JourneyTable = () => {
   const { setIndex } = useContext(IndexContext);
   const handleIndex = (index) => {
     setIndex(index);
-    console.log("Index: " + index);
+    // console.log("Index: " + index);
   }
   return (
     <Table hover className="text-secondary">
