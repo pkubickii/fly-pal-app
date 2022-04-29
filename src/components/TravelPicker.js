@@ -29,10 +29,7 @@ const TravelPicker = () => {
               await sleep(1000);
               axios
                 .get(
-                  "http://localhost:8080/api/neo4j_get_flight/" +
-                    values.startCity +
-                    "-" +
-                    values.endCity
+                  `http://localhost:8080/api/neo4j_get_flight/${values.startCity}-${values.endCity}`
                 )
                 .then((response) => {
                   // console.log(response.data);
