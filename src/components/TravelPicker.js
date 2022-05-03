@@ -52,7 +52,9 @@ const TravelPicker = () => {
       )
       .then((response) => {
         console.log(response.data);
-        // alert(JSON.stringify(response.data, null, 2));
+        if (response.data.length == 0) {
+          throw new Error("Response array is empty!");
+        }
         setFlights(response.data);
       })
       .catch((error) => {
