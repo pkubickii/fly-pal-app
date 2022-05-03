@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { InputGroup, InputGroupText, Input, Card, CardBody } from "reactstrap";
+import {
+  InputGroup,
+  InputGroupText,
+  Input,
+  Card,
+  CardBody,
+  Alert,
+} from "reactstrap";
 import PropTypes from "prop-types";
 import { useField } from "formik";
 
@@ -10,7 +17,6 @@ const SearchBar = ({ data: citiesData, ...props }) => {
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     helpers.setValue(searchWord);
-
     const newFilter = citiesData.filter((city) => {
       return city.name.toLowerCase().includes(searchWord.toLowerCase());
     });
@@ -30,10 +36,23 @@ const SearchBar = ({ data: citiesData, ...props }) => {
   const clearInput = () => {
     setFilteredData([]);
     helpers.setValue("");
+    helpers.setTouched(false);
   };
 
   return (
     <div className="searchBar">
+      <div className="paddingDiv">
+        {meta.touched && meta.error ? (
+          <Alert className="py-1 my-0" color="warning">
+            <span className="alert-inner--icon">
+              <i className="fa fa-info-circle" />
+            </span>
+            <span className="alert-outer--text">
+              <strong>{meta.error}</strong>
+            </span>
+          </Alert>
+        ) : null}
+      </div>
       <InputGroup className="input-group-alternative">
         <InputGroupText>
           <i className="fa fa-map-marker text-blue" />
@@ -43,34 +62,31 @@ const SearchBar = ({ data: citiesData, ...props }) => {
           {...props}
           onChange={handleFilter}
           autoComplete="off"
+          className="font-weight-bold"
         />
         <InputGroupText>
           {field.value != "" ? (
             <i
-              className="fa fa-times text-danger"
+              className="fa fa-times text-danger inputIconMinWidth"
               onClick={clearInput}
               style={{ cursor: "pointer" }}
-            ></i>
+            />
           ) : (
-            <i className="fa fa-search text-success"></i>
+            <i className="fa fa-search text-success inputIconMinWidth" />
           )}
         </InputGroupText>
       </InputGroup>
-
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
 
       {filteredData.length != 0 && (
         <div className="searchResult">
           {filteredData.slice(0, 15).map((val, index) => {
             return (
-              <Card key={index} className="bg-default shadow">
-                <CardBody className="p-1 m-0 ">
+              <Card key={index} className="bg-default shadow m-0 pr-0">
+                <CardBody className="pl-2 py-1">
                   <p
                     onClick={handleSearchResult}
                     style={{ cursor: "pointer" }}
-                    className="mb-0 px-2"
+                    className="mb-0 pl-2 pr-0"
                   >
                     <strong>{val.name}</strong>
                   </p>

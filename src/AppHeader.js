@@ -10,19 +10,8 @@ const AppHeader = () => {
         <img src={logo} className="App-logo" alt="logo fly-pal" />
         <div className="App-name">FlyPal</div>
         <Container>
-          <Row xs="12">
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col></Col>
-            <Col>
+          <Row className="row justify-content-end">
+            <Col md="2">
               <DropMenu />
             </Col>
           </Row>

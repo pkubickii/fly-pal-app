@@ -55,5 +55,13 @@
 }
 
 .searchBar {
-  min-height: 146px;
+  min-height: 192px;
+}
+
+.paddingDiv {
+  min-height: 38px;
+}
+
+.inputIconMinWidth {
+  min-width: 15px;
 }

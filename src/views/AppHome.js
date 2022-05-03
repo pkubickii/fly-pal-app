@@ -52,15 +52,14 @@ const AppHome = () => {
       <FlightsContext.Provider value={{ flights, setFlights }}>
         <IndexContext.Provider value={{ index, setIndex }}>
           <CitiesContext.Provider value={{ cities, setCities }}>
-            <Row className="mt-3 mb-5 pt-5 pb-5" style={{ width: "100%" }}>
+            <Row className="mt-3 mb-2 pt-3 pb-2" style={{ width: "100%" }}>
               <Col md="1"></Col>
               <TravelPicker />
               <Col md="6" className="ml-6">
                 <JourneyTable />
               </Col>
             </Row>
-            <Row className="m-3">
-              <Col md="2"></Col>
+            <Row className="justify-content-center m-3">
               <Col md="8">
                 <Card className="bg-primary shadow mb-5">
                   <CardBody>

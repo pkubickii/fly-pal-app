@@ -26,7 +26,7 @@ const MapView = () => {
 
   const { flights } = useContext(FlightsContext);
   // console.log(JSON.stringify(flights, null, 2));
-  const {index} = useContext(IndexContext);
+  const { index } = useContext(IndexContext);
 
   let markerCords = [];
   let cityNames = [];
@@ -34,8 +34,7 @@ const MapView = () => {
   flights.forEach((flight) => {
     cityNames.push(flight.path.map((path) => [path.name]));
     markerCords.push(flight.path.map((path) => [path.lat, path.lng]));
-  }
-  );
+  });
 
   return (
     <MapContainer
@@ -47,16 +46,14 @@ const MapView = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markerCords[index].map((marker , id) => (
+      {markerCords[index].map((marker, id) => (
         <div key={id}>
           <Marker position={marker} icon={GetIcon()}>
-          <Popup>
-            {cityNames[index][id]}
-          </Popup>
+            <Popup>{cityNames[index][id]}</Popup>
           </Marker>
         </div>
-      ))};
-      <Polyline positions={[markerCords[index]]}></Polyline>
+      ))}
+      ;<Polyline positions={[markerCords[index]]}></Polyline>
     </MapContainer>
   );
 };
