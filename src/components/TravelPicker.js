@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Formik, Field, Form } from "formik";
+import { Formik, Form } from "formik";
 import React, { useContext } from "react";
 import {
   Button,
@@ -7,16 +7,16 @@ import {
   CardBody,
   CardTitle,
   FormGroup,
-  Input,
-  InputGroup,
-  InputGroupText,
 } from "reactstrap";
 import { FlightsContext } from "../context/FlightsContext";
+import SearchBar from "./SearchBar";
+import { CitiesContext } from "../context/CitiesContext";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const TravelPicker = () => {
   const { setFlights } = useContext(FlightsContext);
+  const {cities} = useContext(CitiesContext);
   return (
     <>
       <Card className="bg-primary shadow">
@@ -32,7 +32,7 @@ const TravelPicker = () => {
                   `http://localhost:8080/api/neo4j_get_flight/${values.startCity}-${values.endCity}`
                 )
                 .then((response) => {
-                  // console.log(response.data);
+                  console.log(response.data);
                   // alert(JSON.stringify(response.data, null, 2));
                   setFlights(response.data);
                 })
@@ -45,30 +45,20 @@ const TravelPicker = () => {
             {({ isSubmitting }) => (
               <Form>
                 <FormGroup className="mb-3">
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupText>
-                      <i className="fa fa-map-marker" />
-                    </InputGroupText>
-                    <Field
-                      placeholder="From"
-                      className="p-3"
+                    <SearchBar
+                      placeholder="Choose start city..."
                       name="startCity"
-                      as={Input}
+                      data={cities}
+                      className="p-3"
                     />
-                  </InputGroup>
                 </FormGroup>
                 <FormGroup className="mb-4">
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupText>
-                      <i className="fa fa-map-marker" />
-                    </InputGroupText>
-                    <Field
-                      placeholder="To"
-                      className="p-3"
+                    <SearchBar
+                      placeholder="Choose final city..."
                       name="endCity"
-                      as={Input}
+                      data={cities}
+                      className="p-3"
                     />
-                  </InputGroup>
                 </FormGroup>
                 <div className="text-center">
                   <Button disabled={isSubmitting} color="success" type="submit">

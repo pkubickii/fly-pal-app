@@ -7,7 +7,6 @@ import MapView from "../components/MapView";
 import { FlightsContext } from "../context/FlightsContext";
 import {IndexContext} from "../context/IndexContext";
 import { CitiesContext } from "../context/CitiesContext";
-import SearchBar from "../components/SearchBar";
 import axios from "axios";
 
 const AppHome = () => {
@@ -73,7 +72,6 @@ useEffect(() => {
             <Row className="m-3">
               <Col md="3">
                 <CheckDB />
-                <SearchBar placeholder="Search starting city..." name="start" data={cities} />
               </Col>
             </Row>
           </CitiesContext.Provider> 

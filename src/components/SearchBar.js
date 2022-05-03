@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { InputGroup, InputGroupText, Input } from "reactstrap";
 import PropTypes from "prop-types";
 import { Card, CardBody } from "reactstrap";
+import {useField} from 'formik';
 
-const SearchBar = ({ placeholder, name, data }) => {
+const SearchBar = ({data: citiesData, ...props}) => {
+  const [field, meta, helpers] = useField(props);
   const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
-    setWordEntered(searchWord);
-    const newFilter = data.filter((value) => {
-      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    helpers.setValue(searchWord);
+
+    const newFilter = citiesData.filter((city) => {
+      return city.name.toLowerCase().includes(searchWord.toLowerCase());
     });
     if (searchWord === "") {
       setFilteredData([]);
@@ -19,11 +21,13 @@ const SearchBar = ({ placeholder, name, data }) => {
       setFilteredData(newFilter);
     }
   };
+
   const handleSearchResult = (event) => {
-    setWordEntered(event.target.innerText);
     console.log(event.target.innerText);
+    helpers.setValue(event.target.innerText);
     setFilteredData([]);
   };
+
   return (
     <>
       <InputGroup className="input-group-alternative">
@@ -31,17 +35,20 @@ const SearchBar = ({ placeholder, name, data }) => {
           <i className="fa fa-map-marker" />
         </InputGroupText>
         <Input
-          placeholder={placeholder}
-          className="p-3"
-          name={name}
-          value={wordEntered}
+          {... field}
+          {...props}
           onChange={handleFilter}
         />
       </InputGroup>
 
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div> 
+        ) : null
+      }
+
       {filteredData.length != 0 && (
         <div className="searchResult">
-          {filteredData.slice(0, 15).map((value, index) => {
+          {filteredData.slice(0, 15).map((val, index) => {
             return (
               <Card key={index} className="bg-default shadow">
                 <CardBody className="p-1 m-0 ">
@@ -50,7 +57,7 @@ const SearchBar = ({ placeholder, name, data }) => {
                     style={{ cursor: "pointer" }}
                     className="mb-0 px-2"
                   >
-                    <strong>{value.name}</strong>
+                    <strong>{val.name}</strong>
                   </p>
                 </CardBody>
               </Card>
@@ -61,9 +68,10 @@ const SearchBar = ({ placeholder, name, data }) => {
     </>
   );
 };
+
 SearchBar.propTypes = {
-  placeholder: PropTypes.string,
-  name: PropTypes.string,
+  field: PropTypes.array,
+  props: PropTypes.array,
   data: PropTypes.array,
 };
 export default SearchBar;
