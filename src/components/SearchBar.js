@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { InputGroup, InputGroupText, Input } from "reactstrap";
+import { InputGroup, InputGroupText, Input, Card, CardBody } from "reactstrap";
 import PropTypes from "prop-types";
-import { Card, CardBody } from "reactstrap";
-import {useField} from 'formik';
+import { useField } from "formik";
 
-const SearchBar = ({data: citiesData, ...props}) => {
+const SearchBar = ({ data: citiesData, ...props }) => {
   const [field, meta, helpers] = useField(props);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -28,23 +27,39 @@ const SearchBar = ({data: citiesData, ...props}) => {
     setFilteredData([]);
   };
 
+  const clearInput = () => {
+    setFilteredData([]);
+    helpers.setValue("");
+  };
+
   return (
-    <>
+    <div className="searchBar">
       <InputGroup className="input-group-alternative">
         <InputGroupText>
-          <i className="fa fa-map-marker" />
+          <i className="fa fa-map-marker text-blue" />
         </InputGroupText>
         <Input
-          {... field}
+          {...field}
           {...props}
           onChange={handleFilter}
+          autoComplete="off"
         />
+        <InputGroupText>
+          {field.value != "" ? (
+            <i
+              className="fa fa-times text-danger"
+              onClick={clearInput}
+              style={{ cursor: "pointer" }}
+            ></i>
+          ) : (
+            <i className="fa fa-search text-success"></i>
+          )}
+        </InputGroupText>
       </InputGroup>
 
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div> 
-        ) : null
-      }
+        <div className="error">{meta.error}</div>
+      ) : null}
 
       {filteredData.length != 0 && (
         <div className="searchResult">
@@ -65,7 +80,7 @@ const SearchBar = ({data: citiesData, ...props}) => {
           })}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

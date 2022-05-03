@@ -7,6 +7,8 @@ import {
   CardBody,
   CardTitle,
   FormGroup,
+  Row,
+  Col,
 } from "reactstrap";
 import { FlightsContext } from "../context/FlightsContext";
 import SearchBar from "./SearchBar";
@@ -16,10 +18,10 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const TravelPicker = () => {
   const { setFlights } = useContext(FlightsContext);
-  const {cities} = useContext(CitiesContext);
+  const { cities } = useContext(CitiesContext);
   return (
     <>
-      <Card className="bg-primary shadow">
+      <Card className="bg-primary shadow mb-5">
         <CardTitle className="p-2 h3 bg-primary">Travel Picker</CardTitle>
         <CardBody className="px-lg-4 py-lg-4">
           <Formik
@@ -44,25 +46,36 @@ const TravelPicker = () => {
           >
             {({ isSubmitting }) => (
               <Form>
-                <FormGroup className="mb-3">
-                    <SearchBar
-                      placeholder="Choose start city..."
-                      name="startCity"
-                      data={cities}
-                      className="p-3"
-                    />
-                </FormGroup>
-                <FormGroup className="mb-4">
-                    <SearchBar
-                      placeholder="Choose final city..."
-                      name="endCity"
-                      data={cities}
-                      className="p-3"
-                    />
-                </FormGroup>
+                <Row>
+                  <Col className="lg-6">
+                    <FormGroup className="mb-3">
+                      <SearchBar
+                        placeholder="Choose start city..."
+                        name="startCity"
+                        data={cities}
+                        className="p-3"
+                      />
+                    </FormGroup>
+                  </Col>
+                  <Col className="md-6">
+                    <FormGroup className="mb-4">
+                      <SearchBar
+                        placeholder="Choose final city..."
+                        name="endCity"
+                        data={cities}
+                        className="p-3"
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
                 <div className="text-center">
-                  <Button disabled={isSubmitting} color="success" type="submit">
-                    Search
+                  <Button
+                    className="px-5"
+                    disabled={isSubmitting}
+                    color="success"
+                    type="submit"
+                  >
+                    GO <i className="fa fa-plane ml-1"></i>
                   </Button>
                 </div>
               </Form>

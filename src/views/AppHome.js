@@ -5,28 +5,28 @@ import CheckDB from "../components/CheckDB";
 import JourneyTable from "../components/JourneyTable";
 import MapView from "../components/MapView";
 import { FlightsContext } from "../context/FlightsContext";
-import {IndexContext} from "../context/IndexContext";
+import { IndexContext } from "../context/IndexContext";
 import { CitiesContext } from "../context/CitiesContext";
 import axios from "axios";
 
 const AppHome = () => {
-
   const [index, setIndex] = useState(0);
   const [cities, setCities] = useState([]);
-useEffect(() => {
-  const getData = () => {
-  axios.get("http://localhost:8080/api/neo4j_get_cities")
-  .then((result) => {
-    setCities(result.data);
-    return result;
-  })
-  .catch(console.log.bind(console));
-  }
-  getData();
-},[]);
+
+  useEffect(() => {
+    const getData = () => {
+      axios
+        .get("http://localhost:8080/api/neo4j_get_cities")
+        .then((result) => {
+          setCities(result.data);
+          return result;
+        })
+        .catch(console.log.bind(console));
+    };
+    getData();
+  }, []);
 
   const [flights, setFlights] = useState([
-
     {
       names: ["Warsaw", "Tokyo"],
       cost: 900,
@@ -51,9 +51,9 @@ useEffect(() => {
     <>
       <FlightsContext.Provider value={{ flights, setFlights }}>
         <IndexContext.Provider value={{ index, setIndex }}>
-          <CitiesContext.Provider value={{cities, setCities}}>
+          <CitiesContext.Provider value={{ cities, setCities }}>
             <Row className="mt-3 mb-5 pt-5 pb-5" style={{ width: "100%" }}>
-              <Col md="2"></Col>
+              <Col md="1"></Col>
               <TravelPicker />
               <Col md="6" className="ml-6">
                 <JourneyTable />
@@ -62,7 +62,7 @@ useEffect(() => {
             <Row className="m-3">
               <Col md="2"></Col>
               <Col md="8">
-                <Card className="bg-primary shadow">
+                <Card className="bg-primary shadow mb-5">
                   <CardBody>
                     <MapView />
                   </CardBody>
@@ -74,7 +74,7 @@ useEffect(() => {
                 <CheckDB />
               </Col>
             </Row>
-          </CitiesContext.Provider> 
+          </CitiesContext.Provider>
         </IndexContext.Provider>
       </FlightsContext.Provider>
     </>
