@@ -48,18 +48,18 @@ const AppHome = () => {
   ]);
 
   return (
-    <>
+    <div className="bg-primary text-secondary">
       <FlightsContext.Provider value={{ flights, setFlights }}>
         <IndexContext.Provider value={{ index, setIndex }}>
           <CitiesContext.Provider value={{ cities, setCities }}>
-            <Row className="mt-3 mb-2 pt-3 pb-2" style={{ width: "100%" }}>
+            <Row className="pt-3 pb-2" style={{ width: "100%" }}>
               <Col md="1"></Col>
               <TravelPicker />
               <Col md="6" className="ml-6">
                 <JourneyTable />
               </Col>
             </Row>
-            <Row className="justify-content-center m-3">
+            <Row className="justify-content-center p-3">
               <Col md="8">
                 <Card className="bg-primary shadow mb-5">
                   <CardBody>
@@ -68,7 +68,7 @@ const AppHome = () => {
                 </Card>
               </Col>
             </Row>
-            <Row className="m-3">
+            <Row className="p-3">
               <Col md="3">
                 <CheckDB />
               </Col>
@@ -76,7 +76,7 @@ const AppHome = () => {
           </CitiesContext.Provider>
         </IndexContext.Provider>
       </FlightsContext.Provider>
-    </>
+    </div>
   );
 };
 export default AppHome;

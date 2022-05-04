@@ -18,8 +18,8 @@ import {
 
 const RegisterCard = () => {
   return (
-    <>
-      <Container className="pt-lg-2">
+    <div className="bg-primary">
+      <Container className="py-lg-3 bg-info card">
         <Row className="justify-content-center">
           <Col lg="12">
             <Card className="bg-secondary shadow border-0">
@@ -35,10 +35,7 @@ const RegisterCard = () => {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
-                        alt="github logo"
-                        src={githublogo}
-                      />
+                      <img alt="github logo" src={githublogo} />
                     </span>
                     <span className="btn-inner--text">Github</span>
                   </Button>
@@ -49,10 +46,7 @@ const RegisterCard = () => {
                     onClick={(e) => e.preventDefault()}
                   >
                     <span className="btn-inner--icon mr-1">
-                      <img
-                        alt="google logo"
-                        src={googlelogo}
-                      />
+                      <img alt="google logo" src={googlelogo} />
                     </span>
                     <span className="btn-inner--text">Google</span>
                   </Button>
@@ -65,25 +59,25 @@ const RegisterCard = () => {
                 <Form role="form">
                   <FormGroup>
                     <InputGroup className="input-group-alternative mb-3">
-                        <InputGroupText>
-                          <i className="ni ni-hat-3" />
-                        </InputGroupText>
+                      <InputGroupText>
+                        <i className="ni ni-hat-3" />
+                      </InputGroupText>
                       <Input placeholder="Name" type="text" />
                     </InputGroup>
                   </FormGroup>
                   <FormGroup>
                     <InputGroup className="input-group-alternative mb-3">
-                        <InputGroupText>
-                          <i className="ni ni-email-83" />
-                        </InputGroupText>
+                      <InputGroupText>
+                        <i className="ni ni-email-83" />
+                      </InputGroupText>
                       <Input placeholder="Email" type="email" />
                     </InputGroup>
                   </FormGroup>
                   <FormGroup>
                     <InputGroup className="input-group-alternative">
-                        <InputGroupText>
-                          <i className="ni ni-lock-circle-open" />
-                        </InputGroupText>
+                      <InputGroupText>
+                        <i className="ni ni-lock-circle-open" />
+                      </InputGroupText>
                       <Input
                         placeholder="Password"
                         type="password"
@@ -135,7 +129,7 @@ const RegisterCard = () => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 export default RegisterCard;
