@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { UserContext } from "../context/UserContext";
 import googlelogo from "../assets/img/icons/common/google.svg";
 import githublogo from "../assets/img/icons/common/github.svg";
 import {
@@ -15,20 +14,21 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 import { ModalContext } from "../context/ModalContext";
 
 const LoginCard = () => {
-  const { username, setUsername, email, setEmail, passwd } =
+  const { username, setUsername, email, setEmail } =
     useContext(UserContext);
   const { setModalToggle } = useContext(ModalContext);
 
   const initialValues = {
     email,
-    passwd,
+    passwd: "",
   };
 
   let navigate = useNavigate();
@@ -54,15 +54,14 @@ const LoginCard = () => {
   };
 
   const validationSchema = yup.object({
-    email: yup.string().required("Enter email!"),
+    email: yup.string().email("Enter valid email!").required("Enter email!"),
     passwd: yup.string().required("Enter password!"),
   });
 
   useEffect(() => {
     console.log("username:", username);
     console.log("email:", email);
-    console.log("passwd:", passwd);
-  }, [username, email, passwd]);
+  }, [username, email]);
 
   return (
     <div className="bg-primary">
@@ -120,6 +119,9 @@ const LoginCard = () => {
                           type="email"
                           as={Input}
                         />
+                    <div className="text-warning h4">
+                      <ErrorMessage name="email" />
+                    </div>
                       </InputGroup>
                     </FormGroup>
                     <FormGroup>
@@ -134,6 +136,9 @@ const LoginCard = () => {
                           autoComplete="off"
                           as={Input}
                         />
+                    <div className="text-warning h4">
+                      <ErrorMessage name="passwd" />
+                    </div>
                       </InputGroup>
                     </FormGroup>
                     <div className="custom-control custom-control-alternative custom-checkbox">
@@ -144,7 +149,7 @@ const LoginCard = () => {
                       />
                       <label
                         className="custom-control-label"
-                        htmlFor="customCheckLogin"
+                        htmlFor=" customCheckLogin"
                       >
                         <span>Remember me</span>
                       </label>
