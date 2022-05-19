@@ -15,6 +15,7 @@ import Profile from "./views/Profile";
 const App = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [passwd, setPasswd] = useState("");
 
   const [modalToggle, setModalToggle] = useState(false);
   const [modalType, setModalType] = useState("");
@@ -37,6 +38,8 @@ const App = () => {
               setUsername,
               email,
               setEmail,
+              passwd,
+              setPasswd,
             }}
           >
             <ModalContext.Provider value={{ modalToggle, setModalToggle }}>
