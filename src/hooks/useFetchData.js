@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 export const useFetchData = (props) => {
   const [data, setData] = useState([]);
@@ -24,4 +25,7 @@ export const useFetchData = (props) => {
     data,
     loading,
   };
+};
+useFetchData.propTypes = {
+    props: PropTypes.string,
 };
