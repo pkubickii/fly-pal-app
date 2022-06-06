@@ -22,13 +22,12 @@ import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../context/ModalContext";
 
 const LoginCard = () => {
-  const { username, setUsername, email, setEmail, passwd } =
-    useContext(UserContext);
+  const { username, setUsername, email, setEmail } = useContext(UserContext);
   const { setModalToggle } = useContext(ModalContext);
 
   const initialValues = {
     email,
-    passwd,
+    passwd: "",
   };
 
   let navigate = useNavigate();
@@ -61,8 +60,7 @@ const LoginCard = () => {
   useEffect(() => {
     console.log("username:", username);
     console.log("email:", email);
-    console.log("passwd:", passwd);
-  }, [username, email, passwd]);
+  }, [username, email]);
 
   return (
     <div className="bg-primary">
