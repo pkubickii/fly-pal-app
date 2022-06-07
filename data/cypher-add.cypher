@@ -24,24 +24,69 @@ CREATE(aa: City {
   lat: "52.52437",
   lng: "13.41053"
 }),
-(aa)-[:FLIGHT {time: 140}]->(dd),
-(aa)-[:FLIGHT {time: 565}]->(bb),
-(aa)-[:FLIGHT {time: 900}]->(cc),
-(bb)-[:FLIGHT {time: 495}]->(dd),
-(dd)-[:FLIGHT {time: 140}]->(aa),
-(cc)-[:FLIGHT {time: 1180}]->(dd),
-(ee)-[:FLIGHT {time: 60}]->(dd),
-(dd)-[:FLIGHT {time: 60}]->(ee),
-(ee)-[:FLIGHT {time: 70}]->(aa),
-(aa)-[:FLIGHT {time: 80}]->(ee),
-(ee)-[:FLIGHT {time: 760}]->(bb),
-(bb)-[:FLIGHT {time: 740}]->(ee);
+(aa)-[:FLIGHT {
+    time: 140,
+    cost: 120
+    }]->(dd),
+(aa)-[:FLIGHT {
+    time: 565,
+    cost: 80
+    }]->(bb),
+(aa)-[:FLIGHT {
+    time: 900,
+    cost: 150
+    }]->(cc),
+(bb)-[:FLIGHT {
+    time: 495,
+    cost: 130
+    }]->(dd),
+(dd)-[:FLIGHT {
+    time: 140,
+    cost: 75
+    }]->(aa),
+(cc)-[:FLIGHT {
+    time: 1180,
+    cost: 150
+    }]->(dd),
+(ee)-[:FLIGHT {
+    time: 60,
+    cost: 50
+    }]->(dd),
+(dd)-[:FLIGHT {
+    time: 60,
+    cost: 50
+    }]->(ee),
+(ee)-[:FLIGHT {
+    time: 70,
+    cost: 45
+    }]->(aa),
+(aa)-[:FLIGHT {
+    time: 80,
+    cost: 40
+    }]->(ee),
+(ee)-[:FLIGHT {
+    time: 760,
+    cost: 130
+    }]->(bb),
+(bb)-[:FLIGHT {
+    time: 740,
+    cost: 120
+    }]->(ee);
 
 CALL gds.graph.project(
-    'citiesGraph',
+    'flightByTimeGraph',
     'City',
     'FLIGHT',
     {
         relationshipProperties: 'time'
+    }
+)
+
+CALL gds.graph.project(
+    'flightByCostGraph',
+    'City',
+    'FLIGHT',
+    {
+        relationshipProperties: 'cost'
     }
 )

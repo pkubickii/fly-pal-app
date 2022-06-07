@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field } from "formik";
 import React, { useContext } from "react";
 import {
   Button,
@@ -9,6 +9,8 @@ import {
   FormGroup,
   Row,
   Col,
+  Input,
+  Label,
 } from "reactstrap";
 import { FlightsContext } from "../context/FlightsContext";
 import SearchBar from "./SearchBar";
@@ -24,6 +26,7 @@ const TravelPicker = () => {
   const initialValues = {
     startCity: "",
     endCity: "",
+    radioCostTime: "time",
   };
 
   const validationSchema = yup.object({
@@ -48,7 +51,7 @@ const TravelPicker = () => {
     await sleep(1000);
     axios
       .get(
-        `http://localhost:8080/api/neo4j_get_flight/${values.startCity}-${values.endCity}`
+        `http://localhost:8080/api/neo4j_get_flight_by_${values.radioCostTime}/${values.startCity}-${values.endCity}`
       )
       .then((response) => {
         console.log(response.data);
@@ -99,7 +102,40 @@ const TravelPicker = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-
+                <div
+                  style={{
+                    width: "50%",
+                    margin: "auto",
+                    "text-align": "center",
+                  }}
+                  className="mb-3"
+                >
+                  <FormGroup check inline>
+                    <Field
+                      name="radioCostTime"
+                      id="radioCost"
+                      type="radio"
+                      value="cost"
+                      className="display-4"
+                      as={Input}
+                    />
+                    <Label check for="radioCost" className="text-secondary">
+                      Cost priority
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check inline>
+                    <Field
+                      name="radioCostTime"
+                      id="radioTime"
+                      type="radio"
+                      value="time"
+                      as={Input}
+                    />
+                    <Label check for="radioTime" className="text-secondary">
+                      Time priority
+                    </Label>
+                  </FormGroup>
+                </div>
                 <div className="text-center">
                   <Button
                     className="px-5"
