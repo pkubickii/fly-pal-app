@@ -102,43 +102,51 @@ const TravelPicker = () => {
                     </FormGroup>
                   </Col>
                 </Row>
-                <div
-                  style={{
-                    width: "50%",
-                    margin: "auto",
-                    "text-align": "center",
-                  }}
-                  className="mb-3"
-                >
-                  <FormGroup check inline>
-                    <Field
-                      name="radioCostTime"
-                      id="radioCost"
-                      type="radio"
-                      value="cost"
-                      className="display-4"
-                      as={Input}
-                    />
-                    <Label check for="radioCost" className="text-secondary">
-                      Cost priority
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check inline>
-                    <Field
-                      name="radioCostTime"
-                      id="radioTime"
-                      type="radio"
-                      value="time"
-                      as={Input}
-                    />
-                    <Label check for="radioTime" className="text-secondary">
-                      Time priority
-                    </Label>
-                  </FormGroup>
+                <div className="w-50 bg-gray shadow pt-3 card center px-2 mb-2">
+                  <Row>
+                    <Col className="lg-6">
+                      <FormGroup className="custom-control custom-control-alternative custom-radio">
+                        <Field
+                          name="radioCostTime"
+                          id="radioCost"
+                          type="radio"
+                          value="cost"
+                          className="custom-control-input"
+                          as={Input}
+                        />
+                        <Label
+                          check
+                          for="radioCost"
+                          className="custom-control-label"
+                        >
+                          Cost priority
+                        </Label>
+                      </FormGroup>
+                    </Col>
+                    <Col className="lg-6">
+                      <FormGroup className="custom-control custom-control-alternative custom-radio">
+                        <Field
+                          name="radioCostTime"
+                          id="radioTime"
+                          type="radio"
+                          value="time"
+                          className="custom-control-input"
+                          as={Input}
+                        />
+                        <Label
+                          check
+                          for="radioTime"
+                          className="custom-control-label"
+                        >
+                          Time priority
+                        </Label>
+                      </FormGroup>
+                    </Col>
+                  </Row>
                 </div>
                 <div className="text-center">
                   <Button
-                    className="px-5"
+                    className="px-5 my-2"
                     disabled={isSubmitting}
                     color="success"
                     type="submit"

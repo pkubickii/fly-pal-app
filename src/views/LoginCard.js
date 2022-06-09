@@ -67,7 +67,7 @@ const LoginCard = () => {
       <Container className="pt-lg-3 pb-lg-2 bg-info card">
         <Row className="justify-content-center">
           <Col lg="12">
-            <Card className="bg-secondary text-primary shadow">
+            <Card className="bg-secondary shadow">
               <CardHeader className="bg-white pb-5">
                 <div className="text-muted text-center mb-3">
                   <small>Sign in with</small>
@@ -142,7 +142,7 @@ const LoginCard = () => {
                       />
                       <label
                         className="custom-control-label"
-                        htmlFor="customCheckLogin"
+                        htmlFor=" customCheckLogin"
                       >
                         <span>Remember me</span>
                       </label>

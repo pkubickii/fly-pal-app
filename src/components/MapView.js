@@ -11,6 +11,15 @@ import markerIconPNG from "../assets/img/icons/markers/marker-icon.png";
 import L from "leaflet";
 import { FlightsContext } from "../context/FlightsContext";
 import { IndexContext } from "../context/IndexContext";
+import { useMap } from "react-leaflet";
+
+const MapBoundsRefresh = (props) => {
+  const map = useMap();
+  //console.log("map center:", map.getCenter());
+  map.fitBounds(props.bounds);
+  //console.log("new bounds: ", props.bounds);
+  return null;
+};
 
 const GetIcon = () => {
   return new L.icon({
@@ -25,7 +34,7 @@ const MapView = () => {
   useLeafletScripts();
 
   const { flights } = useContext(FlightsContext);
-  // console.log(JSON.stringify(flights, null, 2));
+  //console.log(JSON.stringify(flights, null, 2));
   const { index } = useContext(IndexContext);
 
   let markerCords = [];
@@ -35,11 +44,11 @@ const MapView = () => {
     cityNames.push(flight.path.map((path) => [path.name]));
     markerCords.push(flight.path.map((path) => [path.lat, path.lng]));
   });
-
+  let bounds = markerCords[index];
   return (
     <MapContainer
-      bounds={[markerCords[index]]}
-      boundsOptions={{ padding: [50, 50] }}
+      bounds={bounds}
+      boundsOptions={{ padding: [0, 0] }}
       scrollWheelZoom={false}
     >
       <TileLayer
@@ -54,6 +63,7 @@ const MapView = () => {
         </div>
       ))}
       ;<Polyline positions={[markerCords[index]]}></Polyline>
+      <MapBoundsRefresh bounds={bounds} />
     </MapContainer>
   );
 };
