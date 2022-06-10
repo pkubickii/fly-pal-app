@@ -21,6 +21,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../context/ModalContext";
 
+axios.defaults.withCredentials = true;
 const LoginCard = () => {
   const { username, setUsername, email, setEmail } = useContext(UserContext);
   const { setModalToggle } = useContext(ModalContext);
