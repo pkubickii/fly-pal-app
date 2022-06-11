@@ -11,6 +11,7 @@ const Profile = () => {
       <div className="mx-9 p-5 card bg-info text-dark">
         <p className="h4">name: {username}</p>
         <p className="h4">email: {email}</p>
+        <h3> role: </h3>
       </div>
     </div>
   );

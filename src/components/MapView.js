@@ -48,7 +48,7 @@ const MapView = () => {
   return (
     <MapContainer
       bounds={bounds}
-      boundsOptions={{ padding: [0, 0] }}
+      boundsOptions={{ padding: [100, 100] }}
       scrollWheelZoom={false}
     >
       <TileLayer
