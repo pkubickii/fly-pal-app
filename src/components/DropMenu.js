@@ -66,7 +66,7 @@ const DropMenu = () => {
                     ) : (
                         <div>
                             <DropdownItem href="/profile">
-                                <i className="fa fa-sign-out mr-2" /> Profile
+                                <i className="fa fa-user mr-2" /> Profile
                             </DropdownItem>
                             <DropdownItem onClick={handleLogout}>
                                 <i className="fa fa-sign-out mr-2" /> Logout
