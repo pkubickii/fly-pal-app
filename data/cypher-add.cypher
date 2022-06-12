@@ -71,7 +71,9 @@ CREATE(aa: City {
 (bb)-[:FLIGHT {
     time: 740,
     cost: 120
-    }]->(ee);
+    }]->(ee),
+(r1:Role { role: 'user'}),
+(r2:Role { role: 'admin'});
 
 CALL gds.graph.project(
     'flightByTimeGraph',
