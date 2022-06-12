@@ -1,3 +1,3 @@
-import React from "react";
+import React from 'react'
 
-export const FlightsContext = React.createContext(null);
+export const FlightsContext = React.createContext(null)

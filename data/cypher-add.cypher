@@ -12,7 +12,6 @@ CALL gds.graph.project(
   relationshipProperties: 'time'
 }
 );
-
 CALL gds.graph.project(
 'flightByCostGraph',
 'City',
