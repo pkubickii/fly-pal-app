@@ -2,7 +2,9 @@ MATCH (n) DETACH DELETE n;
 CALL gds.graph.drop('flightByTimeGraph') YIELD graphName;
 CALL gds.graph.drop('flightByCostGraph') YIELD graphName;
 
-
+CREATE
+(r1:Role { role: 'user'}),
+(r2:Role { role: 'admin'});
 
 CALL gds.graph.project(
 'flightByTimeGraph',
@@ -12,7 +14,6 @@ CALL gds.graph.project(
   relationshipProperties: 'time'
 }
 );
-
 CALL gds.graph.project(
 'flightByCostGraph',
 'City',
