@@ -24,7 +24,8 @@ const JourneyTable = () => {
         {flights.map((flight, index) => (
           <tr scope="row" key={index} onClick={() => handleIndex(index)}>
             <td>{index}</td>
-            <td>{flight.names.map((name) => name + " ")}</td>
+              {/* eslint-disable-next-line react/jsx-key */}
+            <td>{flight.codes.map((code,i) => <span title={flight.names[i]}>{code}&nbsp;</span>)}</td>
             <td>{flight.cost}</td>
             <td>{flight.names.length - 2}</td>
           </tr>

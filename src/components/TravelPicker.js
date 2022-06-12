@@ -49,9 +49,11 @@ const TravelPicker = () => {
   const onSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
     await sleep(1000);
+    let escapedStartCity = values.startCity.replaceAll("/", "%2F");
+    let escapedEndCity = values.endCity.replaceAll("/", "%2F");
     axios
       .get(
-        `http://localhost:8080/api/neo4j_get_flight_by_${values.radioCostTime}/${values.startCity}-${values.endCity}`
+        `http://localhost:8080/api/neo4j_get_flight_by_${values.radioCostTime}/?startCity=${escapedStartCity}&endCity=${escapedEndCity}`
       )
       .then((response) => {
         console.log(response.data);

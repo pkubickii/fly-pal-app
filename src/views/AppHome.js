@@ -28,18 +28,17 @@ const AppHome = () => {
 
   const [flights, setFlights] = useState([
     {
-      names: ["Warsaw", "Tokyo"],
-      cost: 900,
+      names: [" ", " "],
+      codes: [" ", " "],
+      cost: 0,
       path: [
         {
           name: "Warsaw",
-          country: "PL",
           lng: "21.01178",
           lat: "52.22977",
         },
         {
           name: "Tokyo",
-          country: "JP",
           lng: "139.69171",
           lat: "35.6895",
         },
