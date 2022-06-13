@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Table } from 'reactstrap'
+import { Table, UncontrolledPopover, PopoverBody, Button } from 'reactstrap'
 import { FlightsContext } from '../context/FlightsContext'
 import { IndexContext } from '../context/IndexContext'
 
@@ -28,11 +28,28 @@ const JourneyTable = () => {
                         onClick={() => handleIndex(index)}
                     >
                         <td>{index}</td>
-                        {/* eslint-disable-next-line react/jsx-key */}
                         <td>
-                            {flight.codes.map((code, i) => (
-                                <span title={flight.names[i]} key={code}>
-                                    {code}&nbsp;
+                            {flight.codes.map((code, idx) => (
+                                <span key={idx} className="w-100 mr-2">
+                                    <Button
+                                        color="info"
+                                        size="sm"
+                                        type="button"
+                                        outline
+                                        id={code}
+                                    >
+                                        {code}
+                                    </Button>
+                                    <UncontrolledPopover
+                                        placement="top"
+                                        target={code}
+                                        trigger="focus"
+                                        className="popover-info"
+                                    >
+                                        <PopoverBody>
+                                            {flight.names[idx]}
+                                        </PopoverBody>
+                                    </UncontrolledPopover>
                                 </span>
                             ))}
                         </td>
