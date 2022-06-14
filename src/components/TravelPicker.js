@@ -15,6 +15,7 @@ import {
 import { FlightsContext } from '../context/FlightsContext'
 import SearchBar from './SearchBar'
 import { CitiesContext } from '../context/CitiesContext'
+import { FactorContext } from '../context/FactorContext'
 import * as yup from 'yup'
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -22,11 +23,12 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 const TravelPicker = () => {
     const { setFlights } = useContext(FlightsContext)
     const { cities } = useContext(CitiesContext)
+    const { factor, setFactor } = useContext(FactorContext)
 
     const initialValues = {
         startCity: '',
         endCity: '',
-        radioCostTime: 'time',
+        radioCostTime: factor,
     }
 
     const validationSchema = yup.object({
@@ -51,6 +53,7 @@ const TravelPicker = () => {
         await sleep(1000)
         let escapedStartCity = values.startCity.replaceAll('/', '%2F')
         let escapedEndCity = values.endCity.replaceAll('/', '%2F')
+        setFactor(values.radioCostTime)
         axios
             .get(
                 `http://localhost:8080/api/neo4j_get_flight_by_${values.radioCostTime}/?startCity=${escapedStartCity}&endCity=${escapedEndCity}`
@@ -104,7 +107,7 @@ const TravelPicker = () => {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <div className="w-50 bg-gray shadow pt-3 card center px-2 mb-2">
+                                <div className="w-50 bg-gray shadow pt-3 card center pl-2 mb-2">
                                     <Row>
                                         <Col className="lg-6">
                                             <FormGroup className="custom-control custom-control-alternative custom-radio">

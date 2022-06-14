@@ -8,10 +8,12 @@ import { FlightsContext } from '../context/FlightsContext'
 import { IndexContext } from '../context/IndexContext'
 import { CitiesContext } from '../context/CitiesContext'
 import axios from 'axios'
+import { FactorContext } from '../context/FactorContext'
 
 const AppHome = () => {
     const [index, setIndex] = useState(0)
     const [cities, setCities] = useState([])
+    const [factor, setFactor] = useState('time')
 
     useEffect(() => {
         const getData = () => {
@@ -30,7 +32,8 @@ const AppHome = () => {
         {
             names: ['Warsaw', 'Tokyo'],
             codes: ['WAW', 'TKO'],
-            cost: 0,
+            altCost: [1],
+            cost: [1],
             path: [
                 {
                     name: 'Warsaw',
@@ -51,27 +54,32 @@ const AppHome = () => {
             <FlightsContext.Provider value={{ flights, setFlights }}>
                 <IndexContext.Provider value={{ index, setIndex }}>
                     <CitiesContext.Provider value={{ cities, setCities }}>
-                        <Row className="pt-3 pb-2" style={{ width: '100%' }}>
-                            <Col md="1"></Col>
-                            <TravelPicker />
-                            <Col md="6" className="ml-6">
-                                <JourneyTable />
-                            </Col>
-                        </Row>
-                        <Row className="justify-content-center p-3">
-                            <Col md="8">
-                                <Card className="bg-primary shadow mb-5">
-                                    <CardBody>
-                                        <MapView />
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row className="p-3">
-                            <Col md="3">
-                                <CheckDB />
-                            </Col>
-                        </Row>
+                        <FactorContext.Provider value={{ factor, setFactor }}>
+                            <Row
+                                className="pt-3 pb-2"
+                                style={{ width: '100%' }}
+                            >
+                                <Col md="1"></Col>
+                                <TravelPicker />
+                                <Col md="6" className="ml-6">
+                                    <JourneyTable />
+                                </Col>
+                            </Row>
+                            <Row className="justify-content-center p-3">
+                                <Col md="8">
+                                    <Card className="bg-primary shadow mb-5">
+                                        <CardBody>
+                                            <MapView />
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
+                            <Row className="p-3">
+                                <Col md="3">
+                                    <CheckDB />
+                                </Col>
+                            </Row>
+                        </FactorContext.Provider>
                     </CitiesContext.Provider>
                 </IndexContext.Provider>
             </FlightsContext.Provider>
