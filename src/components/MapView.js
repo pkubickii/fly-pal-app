@@ -33,9 +33,11 @@ const MapView = () => {
 
     let markerCords = []
     let cityNames = []
+    let cityCodes = []
 
     flights.forEach((flight) => {
         cityNames.push(flight.path.map((path) => [path.name]))
+        cityCodes.push(flight.path.map((path) => [path.iataCode]))
         markerCords.push(flight.path.map((path) => [path.lat, path.lng]))
     })
     let bounds = markerCords[index]
@@ -52,7 +54,17 @@ const MapView = () => {
             {markerCords[index].map((marker, id) => (
                 <div key={id}>
                     <Marker position={marker} icon={GetIcon()}>
-                        <Popup>{cityNames[index][id]}</Popup>
+                        <Popup>
+                            <h4>{cityNames[index][id]}</h4>
+                            <img style={{
+                                backgroundImage: "url(/spinner.gif)",
+                                backgroundPosition: 'center',
+                                backgroundSize: 'cover',
+                                backgroundRepeat: 'no-repeat'
+                            }} height="160px" width="240px"
+                                 src={`http://localhost:8080/api/airport_image?city="${cityNames[index][id]}"&code="${cityCodes[index][id]}"`}
+                            />
+                        </Popup>
                     </Marker>
                 </div>
             ))}

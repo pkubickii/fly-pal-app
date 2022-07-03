@@ -1,4 +1,4 @@
-CREATE
+    CREATE
 (c0:City {iataCode: "ATL", name: "Hartsfield-Jackson Atlanta International Airport GA", lat: "33.6367", lng: "-84.4281"}),
 (c1:City {iataCode: "PEK", name: "Beijing (BJS) - Capital", lat: "40.08", lng: "116.5844"}),
 (c2:City {iataCode: "ORD", name: "Chicago - O'Hare International, IL", lat: "41.9786", lng: "-87.9047"}),

@@ -15,10 +15,10 @@ CALL gds.graph.project(
 }
 );
 CALL gds.graph.project(
-'flightByCostGraph',
+'flightByCostGraph2',
 'City',
 'FLIGHT',
 {
-  relationshipProperties: 'cost'
+  relationshipProperties: ['cost', 'time']
 }
 );
