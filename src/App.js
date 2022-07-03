@@ -12,12 +12,14 @@ import Map from './views/Map'
 import { UserContext } from './context/UserContext'
 import Profile from './views/Profile'
 import axios from 'axios'
+import { CitiesContext } from './context/CitiesContext'
 
 const App = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [role, setRole] = useState('')
     const [auth, setAuth] = useState(false)
+    const [cities, setCities] = useState([])
 
     const [modalToggle, setModalToggle] = useState(false)
     const [modalType, setModalType] = useState('')
@@ -50,6 +52,19 @@ const App = () => {
             })
     }, [])
 
+    useEffect(() => {
+        const getData = () => {
+            axios
+                .get('http://localhost:8080/api/neo4j_get_cities')
+                .then((result) => {
+                    setCities(result.data)
+                    return result
+                })
+                .catch(console.log.bind(console))
+        }
+        getData()
+    }, [])
+
     return (
         <>
             <Router>
@@ -69,19 +84,29 @@ const App = () => {
                         <ModalContext.Provider
                             value={{ modalToggle, setModalToggle }}
                         >
-                            <AppHeader />
-                            <Routes>
-                                <Route path="/" element={<AppHome />} />
-                                <Route path="/login" element={<LoginCard />} />
-                                <Route
-                                    path="/register"
-                                    element={<RegisterCard />}
-                                />
-                                <Route path="/map" element={<Map />} />
-                                <Route path="/profile" element={<Profile />} />
-                            </Routes>
-                            <ModalWrapper modalType={modalType} />
-                            <AppFooter />
+                            <CitiesContext.Provider
+                                value={{ cities, setCities }}
+                            >
+                                <AppHeader />
+                                <Routes>
+                                    <Route path="/" element={<AppHome />} />
+                                    <Route
+                                        path="/login"
+                                        element={<LoginCard />}
+                                    />
+                                    <Route
+                                        path="/register"
+                                        element={<RegisterCard />}
+                                    />
+                                    <Route path="/map" element={<Map />} />
+                                    <Route
+                                        path="/profile"
+                                        element={<Profile />}
+                                    />
+                                </Routes>
+                                <ModalWrapper modalType={modalType} />
+                                <AppFooter />
+                            </CitiesContext.Provider>
                         </ModalContext.Provider>
                     </UserContext.Provider>
                 </div>

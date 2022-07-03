@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import {
     Container,
     Button,
@@ -15,54 +15,40 @@ import {
     Input,
 } from 'reactstrap'
 import * as yup from 'yup'
+import SearchBar from './SearchBar'
 import { CitiesContext } from '../context/CitiesContext'
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const AddCity = () => {
-    const { setCities } = useContext(CitiesContext)
-    const [submitted, setSubmitted] = useState(false)
-
-    useEffect(() => {
-        const getData = () => {
-            axios
-                .get('http://localhost:8080/api/neo4j_get_cities')
-                .then((result) => {
-                    setCities(result.data)
-                    return result
-                })
-                .catch(console.log.bind(console))
-        }
-        getData()
-    }, [submitted, setCities])
+const AddFlight = () => {
+    const { cities } = useContext(CitiesContext)
 
     const initialValues = {
-        iataCode: '',
-        name: '',
-        lat: '',
-        lng: '',
+        startCity: '',
+        endCity: '',
+        distance: '',
+        time: '',
+        cost: '',
     }
 
     const validationSchema = yup.object({
-        iataCode: yup
+        startCity: yup
             .string()
-            .length(3, 'IATA code must be 3 characters!')
-            .required('Missing iata code!'),
-        name: yup.string().required('Missing city name!'),
-        lat: yup
+            .required('Pick up start city!')
+            .oneOf(
+                cities.map((city) => city.name),
+                'Only listed cities!'
+            ),
+        endCity: yup
             .string()
-            .matches(
-                /^(\+|-)?(?:90(?:(?:\.0+)?)|(?:[0-9]|[1-8][0-9])(?:(?:\.\d+)?))$/,
-                'Bad latitude format!'
-            )
-            .required('Missing latitude!'),
-        lng: yup
-            .string()
-            .matches(
-                /^(\+|-)?(?:180(?:(?:\.0+)?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.\d+)?))$/,
-                'Bad longitude format!'
-            )
-            .required('Missing longitude!'),
+            .required('Pick up final city!')
+            .oneOf(
+                cities.map((city) => city.name),
+                'Only listed cities!'
+            ),
+        distance: yup.string().required('Distance required!'),
+        time: yup.string().required('Time required!'),
+        cost: yup.string().required('Cost required!'),
     })
 
     const onSubmit = async (values, { setSubmitting }) => {
@@ -70,11 +56,11 @@ const AddCity = () => {
         await sleep(1000)
 
         axios
-            .post('http://localhost:8080/api/neo4j_post_city', values)
+            .post('http://localhost:8080/api/neo4j_post_flight', values)
             .then((response) => {
                 console.log('response', response.data)
                 if (!response.data.error) {
-                    console.log('Added city with no errors.')
+                    console.log('Added flight with no errors.')
                 } else {
                     console.log('Error:', response.data.error)
                 }
@@ -82,7 +68,6 @@ const AddCity = () => {
             .catch((error) => {
                 console.log('error', error)
             })
-        setSubmitted(true)
         setSubmitting(false)
     }
 
@@ -94,7 +79,7 @@ const AddCity = () => {
                         <Card className="bg-secondary shadow border-0">
                             <CardHeader className="bg-white pb-5">
                                 <div className="text-muted text-center mb-3">
-                                    <b className="display-4">Add city</b>
+                                    <b className="display-4">Add flight</b>
                                 </div>
                             </CardHeader>
                             <CardBody className="px-lg-5 py-lg-5">
@@ -106,19 +91,41 @@ const AddCity = () => {
                                     {({ isSubmitting }) => (
                                         <Form>
                                             <Row>
+                                                <Col className="lg-6">
+                                                    <FormGroup className="mb-4">
+                                                        <SearchBar
+                                                            placeholder="Choose start city..."
+                                                            name="startCity"
+                                                            data={cities}
+                                                            className="p-3"
+                                                        />
+                                                    </FormGroup>
+                                                </Col>
+                                                <Col className="lg-6">
+                                                    <FormGroup className="mb-4">
+                                                        <SearchBar
+                                                            placeholder="Choose final city..."
+                                                            name="endCity"
+                                                            data={cities}
+                                                            className="p-3"
+                                                        />
+                                                    </FormGroup>
+                                                </Col>
+                                            </Row>
+                                            <Row>
                                                 <Col className="lg-12">
                                                     <FormGroup>
                                                         <InputGroup className="input-group-alternative mb-3">
                                                             <InputGroupText>
-                                                                <i className="fa fa-plane" />
+                                                                <i className="fa fa-road" />
                                                             </InputGroupText>
                                                             <Field
-                                                                name="iataCode"
+                                                                name="distance"
                                                                 type="text"
-                                                                placeholder="IATA CODE"
+                                                                placeholder="distance"
                                                                 as={Input}
                                                             />
-                                                            <ErrorMessage name="iataCode">
+                                                            <ErrorMessage name="distance">
                                                                 {(msg) => (
                                                                     <div
                                                                         style={{
@@ -134,15 +141,15 @@ const AddCity = () => {
                                                     <FormGroup>
                                                         <InputGroup className="input-group-alternative mb-3">
                                                             <InputGroupText>
-                                                                <i className="fa fa-globe" />
+                                                                <i className="fa fa-clock-o" />
                                                             </InputGroupText>
                                                             <Field
-                                                                name="name"
+                                                                name="time"
                                                                 type="text"
-                                                                placeholder="city name"
+                                                                placeholder="time"
                                                                 as={Input}
                                                             />
-                                                            <ErrorMessage name="name">
+                                                            <ErrorMessage name="time">
                                                                 {(msg) => (
                                                                     <div
                                                                         style={{
@@ -158,39 +165,15 @@ const AddCity = () => {
                                                     <FormGroup>
                                                         <InputGroup className="input-group-alternative mb-3">
                                                             <InputGroupText>
-                                                                <i className="fa fa-location-arrow" />
+                                                                <i className="fa fa-usd" />
                                                             </InputGroupText>
                                                             <Field
-                                                                name="lat"
+                                                                name="cost"
                                                                 type="text"
-                                                                placeholder="latitude"
+                                                                placeholder="cost"
                                                                 as={Input}
                                                             />
-                                                            <ErrorMessage name="lat">
-                                                                {(msg) => (
-                                                                    <div
-                                                                        style={{
-                                                                            color: 'red',
-                                                                        }}
-                                                                    >
-                                                                        {msg}
-                                                                    </div>
-                                                                )}
-                                                            </ErrorMessage>
-                                                        </InputGroup>
-                                                    </FormGroup>
-                                                    <FormGroup>
-                                                        <InputGroup className="input-group-alternative mb-3">
-                                                            <InputGroupText>
-                                                                <i className="fa fa-location-arrow" />
-                                                            </InputGroupText>
-                                                            <Field
-                                                                name="lng"
-                                                                type="text"
-                                                                placeholder="longitude"
-                                                                as={Input}
-                                                            />
-                                                            <ErrorMessage name="lng">
+                                                            <ErrorMessage name="cost">
                                                                 {(msg) => (
                                                                     <div
                                                                         style={{
@@ -212,7 +195,7 @@ const AddCity = () => {
                                                     color="success"
                                                     type="submit"
                                                 >
-                                                    Add city
+                                                    Add flight
                                                     <i className="fa fa-paper-plane-o ml-1"></i>
                                                 </Button>
                                             </div>
@@ -227,4 +210,4 @@ const AddCity = () => {
         </div>
     )
 }
-export default AddCity
+export default AddFlight
