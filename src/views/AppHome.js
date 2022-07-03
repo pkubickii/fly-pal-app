@@ -38,10 +38,12 @@ const AppHome = () => {
                 {
                     name: 'Warsaw',
                     lng: '21.01178',
+                    iataCode: 'WAW',
                     lat: '52.22977',
                 },
                 {
                     name: 'Tokyo',
+                    iataCode: 'NRT',
                     lng: '139.69171',
                     lat: '35.6895',
                 },
